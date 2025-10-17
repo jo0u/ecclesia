@@ -15,7 +15,7 @@ class UserChart extends ChartWidget
     protected function getData(): array
     {
         $totalUsers = User::count();
-        $verifiedUsers = User::whereNotNull('email_verified_at')->count();
+        $verifiedUsers = User::whereNotNull('ativo')->count();
         $unverifiedUsers = $totalUsers - $verifiedUsers;
 
         return [
@@ -43,15 +43,15 @@ class UserChart extends ChartWidget
         return 'doughnut';
     }
 
-    protected function getOptions(): array
-    {
-        return [
-            'plugins' => [
-                'legend' => [
-                    'display' => true,
-                    'position' => 'bottom',
-                ],
+protected function getOptions(): array
+{
+    return [
+        'plugins' => [
+            'legend' => [
+                'display' => true,
+                'position' => 'bottom',
             ],
-        ];
-    }
+        ],
+    ];
+}
 }

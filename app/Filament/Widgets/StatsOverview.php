@@ -11,7 +11,7 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         $totalUsers = User::count();
-        $verifiedUsers = User::whereNotNull('email_verified_at')->count();
+        $verifiedUsers = User::whereNotNull('ativo')->count();
         $newThisWeek = User::where('created_at', '>=', now()->subWeek())->count();
 
         return [
@@ -34,6 +34,8 @@ class StatsOverview extends BaseWidget
                 ->description('Cadastros recentes')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')
                 ->color('warning'),
+
+                
         ];
     }
 }

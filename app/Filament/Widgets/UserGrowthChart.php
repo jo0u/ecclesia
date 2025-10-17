@@ -16,7 +16,7 @@ class UserGrowthChart extends ChartWidget
     {
         // Dados reais simples
         $totalUsers = User::count();
-        $verifiedUsers = User::whereNotNull('email_verified_at')->count();
+        $verifiedUsers = User::whereNotNull('ativo')->count();
         $newThisMonth = User::whereMonth('created_at', now()->month)->count();
         $newLastMonth = User::whereMonth('created_at', now()->subMonth()->month)->count();
 

@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\User;
+use App\Models\Pessoa;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -10,12 +11,12 @@ class StatsOverview extends BaseWidget
 {
     protected function getStats(): array
     {
-        $totalUsers = User::count();
+        $totalUsers = Pessoa::count();
         $verifiedUsers = User::whereNotNull('ativo')->count();
-        $newThisWeek = User::where('created_at', '>=', now()->subWeek())->count();
+        $newThisWeek = Pessoa::where('created_at', '>=', now()->subWeek())->count();
 
         return [
-            Stat::make('Total de Usuários', $totalUsers)
+            Stat::make('Total de Membros', $totalUsers)
                 ->description('Sistema completo')
                 ->descriptionIcon('heroicon-o-user-group')
                 ->color('success')
@@ -24,13 +25,7 @@ class StatsOverview extends BaseWidget
                     'class' => 'cursor-pointer',
                 ]),
 
-            Stat::make('Usuários Verificados', $verifiedUsers)
-                ->description('E-mail confirmado')
-                ->descriptionIcon('heroicon-o-check-badge')
-                ->color('info')
-                ->descriptionColor($verifiedUsers > 0 ? 'success' : 'danger'),
-
-            Stat::make('Novos Esta Semana', $newThisWeek)
+            Stat::make('Novos Membros Esta Semana', $newThisWeek)
                 ->description('Cadastros recentes')
                 ->descriptionIcon('heroicon-o-arrow-trending-up')
                 ->color('warning'),

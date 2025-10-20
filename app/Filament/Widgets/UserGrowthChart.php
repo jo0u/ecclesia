@@ -2,38 +2,37 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\User;
+use App\Models\Pessoa;
 use Filament\Widgets\ChartWidget;
 
 class UserGrowthChart extends ChartWidget
 {
     public function getHeading(): string
     {
-        return 'Crescimento de Usuários';
+        return 'Crescimento de Membros';
     }
 
     protected function getData(): array
     {
         // Dados reais simples
-        $totalUsers = User::count();
-        $verifiedUsers = User::whereNotNull('ativo')->count();
-        $newThisMonth = User::whereMonth('created_at', now()->month)->count();
-        $newLastMonth = User::whereMonth('created_at', now()->subMonth()->month)->count();
+        $totalUsers = Pessoa::count();
+        //$verifiedUsers = Pessoa::whereNotNull('ativo')->count();
+        $newThisMonth = Pessoa::whereMonth('created_at', now()->month)->count();
+        $newLastMonth = Pessoa::whereMonth('created_at', now()->subMonth()->month)->count();
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Usuários',
-                    'data' => [$totalUsers, $verifiedUsers, $newThisMonth, $newLastMonth],
+                    'label' => 'Membros',
+                    'data' => [$totalUsers, $newThisMonth, $newLastMonth],
                     'backgroundColor' => [
                         '#3b82f6', // Total
-                        '#10b981', // Verificados
                         '#f59e0b', // Este mês
                         '#ef4444', // Mês passado
                     ],
                 ],
             ],
-            'labels' => ['Total', 'Verificados', 'Este Mês', 'Mês Passado'],
+            'labels' => ['Total', 'Este Mês', 'Mês Passado'],
         ];
     }
 

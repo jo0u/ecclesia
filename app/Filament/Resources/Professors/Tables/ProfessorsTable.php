@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Filament\Resources\Pessoas\Tables;
+namespace App\Filament\Resources\Professors\Tables;
 
-use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
@@ -12,29 +11,20 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 
-class PessoasTable
+class ProfessorsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('nome')
+                TextColumn::make('pessoa.nome') // ← CORRIGIDO: pessoa.nome
                     ->label('Nome')
                     ->searchable()
                     ->sortable(),
                     
-                TextColumn::make('email')
-                    ->label('Email')
-                    ->searchable()
-                    ->sortable(),
-                    
-                TextColumn::make('telefone')
-                    ->label('Telefone'),
-                    
-                TextColumn::make('data_nascimento')
-                    ->label('Data Nascimento')
-                    ->date('d/m/Y')
-                    ->sortable(),
+                TextColumn::make('especialidade')
+                    ->label('Especialidade')
+                    ->searchable(),
                     
                 IconColumn::make('ativo')
                     ->label('Ativo')
@@ -46,9 +36,6 @@ class PessoasTable
                     ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
             ])
             ->actions([
                 EditAction::make(),

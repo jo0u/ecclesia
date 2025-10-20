@@ -22,6 +22,16 @@ class ProfessorResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Professor';
 
+
+    // PERSONALIZE O NOME NA BARRA LATERAL
+    protected static ?string $navigationLabel = 'Profissionais';
+
+    // PERSONALIZE O TÍTULO (opcional)
+    protected static ?string $modelLabel = 'Profissional';
+
+    // PERSONALIZE O TÍTULO PLURAL (opcional)
+    protected static ?string $pluralModelLabel = 'Profissionais';
+
     public static function form(Schema $schema): Schema
     {
         return ProfessorForm::configure($schema);

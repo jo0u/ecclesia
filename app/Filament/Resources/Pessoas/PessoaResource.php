@@ -21,6 +21,18 @@ class PessoaResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'ake:filament-resource Aula';
+    
+
+    // PERSONALIZE O NOME NA BARRA LATERAL
+    protected static ?string $navigationLabel = 'Membros';
+
+    // PERSONALIZE O TÍTULO (opcional)
+    protected static ?string $modelLabel = 'Membro';
+
+    // PERSONALIZE O TÍTULO PLURAL (opcional)
+    protected static ?string $pluralModelLabel = 'Membros';
+
+
 
     public static function form(Schema $schema): Schema
     {
